@@ -8,7 +8,15 @@ import numpy as np
 # filename = 'diabetes_dataset.sav'
 # with open(filename, 'rb') as file:
 #     model = pickle.load(file)
-model_RF = pickle.load(open('diabetes_dataset.sav', 'rb'))
+# Load the trained model
+model_path = "diabetes_dataset.sav"
+
+if os.path.exists(model_path):
+    with open(model_path, 'rb') as file:
+        model_RF = pickle.load(file)
+else:
+    st.error(f"File model '{model_path}' tidak ditemukan. Pastikan file tersedia di direktori yang benar.")
+    st.stop()
 
 # Function to make predictions
 def predict_diabetes(features):
